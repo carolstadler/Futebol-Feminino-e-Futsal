@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área Delas | Futebol Feminino</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <span>ÁREA</span>
+            <strong>DELAS</strong>
+        </div>
+
+        <nav class="nav">
+            <a href="#inicio">Início</a>
+            <a href="#brasil">Brasil</a>
+            <a href="#mundo">Mundo</a>
+            <a href="#jogos">Jogos</a>
+            <a href="#copa">Copa 2027</a>
+        </nav>
+
+        <button class="menu-btn" onclick="abrirMenu()">☰</button>
+
+    </header>
+
+    <!-- MENU MOBILE -->
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="#inicio">Início</a>
+        <a href="#brasil">Brasil</a>
+        <a href="#mundo">Mundo</a>
+        <a href="#jogos">Jogos</a>
+        <a href="#copa">Copa 2027</a>
+    </div>
+
+
+    <!-- HERO -->
+    <main id="inicio">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="tag">FUTEBOL FEMININO</span>
+
+                <h1>
+                    O futebol feminino
+                    <span>é aqui.</span>
+                </h1>
+
+                <p>
+                    Notícias, resultados, Seleção Brasileira,
+                    grandes jogadoras e tudo que acontece dentro
+                    e fora dos gramados.
+                </p>
+
+                <a href="#noticias" class="hero-btn">
+                    VER NOTÍCIAS
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://www.cbf.com.br/_next/image?q=70&url=https%3A%2F%2Fstcbfsiteprdimgbrs.blob.core.windows.net%2Fimg-site%2Fcdn%2F14_04_2026_Brasil_vs_Zambia_8318_df4435289c.jpeg&w=3840"
+                    alt="Seleção Brasileira Feminina">
+            </div>
+
+        </section>
+
+
+        <!-- BARRA DE DESTAQUE -->
+        <section class="breaking">
+
+            <div class="breaking-title">
+                <span class="live"></span>
+                EM DESTAQUE
+            </div>
+
+            <div class="breaking-text">
+                São Paulo conquista seu primeiro Brasileirão Feminino A1
+            </div>
+
+            <div class="breaking-arrow">
+                →
+            </div>
+
+        </section>
+
+
+        <!-- NOTÍCIAS -->
+        <section class="section" id="noticias">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">ÚLTIMAS NOTÍCIAS</span>
+                    <h2>O que está acontecendo</h2>
+                </div>
+
+                <button onclick="mostrarMensagem()">
+                    Ver todas →
+                </button>
+
+            </div>
+
+
+            <div class="news-grid">
+
+                <!-- NOTÍCIA PRINCIPAL -->
+                <article class="main-news">
+
+                    <div class="news-image">
+                        <img
+                            src="https://www.cbf.com.br/_next/image?q=70&url=https%3A%2F%2Fstcbfsiteprdimgbrs.blob.core.windows.net%2Fimg-site%2Fcdn%2F14_04_2026_Brasil_vs_Zambia_8318_df4435289c.jpeg&w=3840"
+                            alt="Seleção Brasileira Feminina">
+
+                        <span class="category">SELEÇÃO</span>
+                    </div>
+
+                    <div class="news-content">
+
+                        <span class="date">
+                            05 OUT 2026
+                        </span>
+
+                        <h3>
+                            Seleção Brasileira se prepara para enfrentar a Argentina
+                        </h3>
+
+                        <p>
+                            O Brasil se reúne em Porto Alegre para os dois amistosos
+                            contra a Argentina durante a Data FIFA de outubro.
+                        </p>
+
+                        <a href="https://www.cbf.com.br/selecao-brasileira/noticias/selecao-feminina-principal/a/selecao-feminina-comeca-a-se-apresentar-para-amistosos-com-a-argentina"
+                           target="_blank">
+                            Ler notícia →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NOTÍCIA 2 -->
+                <article class="news-card">
+
+                    <div class="card-image">
+                        <img
+                            src="https://midias.romanews.com.br/2026/06/02/time-titular-da-seleo-brasileira-no-duelo-contra-a-coreia-do-sul-pelo-fifa-series-mjqdugbk.jpg"
+                            alt="Seleção Brasileira Feminina">
+
+                        <span class="category">BRASIL</span>
+                    </div>
+
+                    <div class="card-content">
+
+                        <span class="date">
+                            03 OUT 2026
+                        </span>
+
+                        <h3>
+                            São Paulo é campeão do Brasileirão Feminino 2026
+                        </h3>
+
+                        <p>
+                            Tricolor supera o Corinthians por 3 a 2 no placar
+                            agregado e levanta a taça nacional.
+                        </p>
+
+                        <a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-feminino-a1/a/final-brasileirao-feminino-a-1-2026"
+                           target="_blank">
+                            Ler notícia →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NOTÍCIA 3 -->
+                <article class="news-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://p2.trrsf.com/image/fget/cf/774/0/images.terra.com/2026/04/19/feminino-toohzvhvigyq.png"
+                            alt="Brasil no futebol feminino">
+
+                        <span class="category">MUNDO</span>
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <span class="date">
+                            2026
+                        </span>
+
+                        <h3>
+                            Brasil ganha destaque no cenário internacional
+                        </h3>
+
+                        <p>
+                            A Seleção segue entre as equipes que se preparam
+                            para a grande Copa do Mundo de 2027.
+                        </p>
+
+                        <a href="#copa">
+                            Saiba mais →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- BRASIL -->
+        <section class="dark-section" id="brasil">
+
+            <div class="section-heading light">
+
+                <div>
+                    <span class="section-label">FUTEBOL BRASILEIRO</span>
+                    <h2>Brasil em campo</h2>
+                </div>
+
+            </div>
+
+
+            <div class="featured">
+
+                <div class="featured-image">
+
+                    <img
+                        src="https://www.cbf.com.br/_next/image?q=70&url=https%3A%2F%2Fstcbfsiteprdimgbrs.blob.core.windows.net%2Fimg-site%2Fcdn%2F14_04_2026_Brasil_vs_Zambia_8318_df4435289c.jpeg&w=3840"
+                        alt="Jogadoras da Seleção Brasileira">
+
+                </div>
+
+                <div class="featured-info">
+
+                    <span class="tag">SELEÇÃO BRASILEIRA</span>
+
+                    <h2>
+                        De olho na Copa do Mundo Feminina 2027
+                    </h2>
+
+                    <p>
+                        A Seleção Brasileira continua sua preparação para a
+                        Copa do Mundo que será disputada no Brasil.
+                    </p>
+
+                    <div class="match-mini">
+
+                        <div>
+                            <strong>BRASIL</strong>
+                            <span>🇧🇷</span>
+                        </div>
+
+                        <b>VS</b>
+
+                        <div>
+                            <span>🇦🇷</span>
+                            <strong>ARGENTINA</strong>
+                        </div>
+
+                    </div>
+
+                    <p class="match-date">
+                        10 OUT • 16:30 • BEIRA-RIO
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- JOGOS -->
+        <section class="section" id="jogos">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">AGENDA</span>
+                    <h2>Próximos jogos</h2>
+                </div>
+
+            </div>
+
+
+            <div class="matches">
+
+                <div class="match">
+
+                    <span class="match-status">10 OUT</span>
+
+                    <div class="team">
+                        <span class="flag">🇧🇷</span>
+                        Brasil
+                    </div>
+
+                    <strong>16:30</strong>
+
+                    <div class="team">
+                        Argentina
+                        <span class="flag">🇦🇷</span>
+                    </div>
+
+                    <small>Beira-Rio • Porto Alegre</small>
+
+                </div>
+
+
+                <div class="match">
+
+                    <span class="match-status">13 OUT</span>
+
+                    <div class="team">
+                        <span class="flag">🇧🇷</span>
+                        Brasil
+                    </div>
+
+                    <strong>20:30</strong>
+
+                    <div class="team">
+                        Argentina
+                        <span class="flag">🇦🇷</span>
+                    </div>
+
+                    <small>Arena Pernambuco</small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MUNDO -->
+        <section class="world-section" id="mundo">
+
+            <div class="world-content">
+
+                <span class="section-label">
+                    FUTEBOL FEMININO NO MUNDO
+                </span>
+
+                <h2>
+                    O jogo não para.
+                </h2>
+
+                <p>
+                    Das grandes competições internacionais às novas
+                    gerações de estrelas, o futebol feminino cresce
+                    dentro e fora do Brasil.
+                </p>
+
+                <button onclick="mostrarMensagem()">
+                    EXPLORAR MUNDO →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- COPA 2027 -->
+        <section class="cup-section" id="copa">
+
+            <div class="cup-text">
+
+                <span class="section-label">
+                    COPA DO MUNDO FEMININA
+                </span>
+
+                <h2>
+                    BRASIL<br>
+                    <span>2027</span>
+                </h2>
+
+                <p>
+                    Pela primeira vez, a América do Sul receberá a
+                    Copa do Mundo Feminina. O Brasil será o país-sede.
+                </p>
+
+                <div class="cup-info">
+
+                    <div>
+                        <strong>24</strong>
+                        <span>JUNHO</span>
+                    </div>
+
+                    <div>
+                        <strong>25</strong>
+                        <span>JULHO</span>
+                    </div>
+
+                    <div>
+                        <strong>32</strong>
+                        <span>SELEÇÕES</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="cup-ball">
+                ⚽
+            </div>
+
+        </section>
+
+
+        <!-- NEWSLETTER -->
+        <section class="newsletter">
+
+            <div>
+
+                <span class="section-label">
+                    FIQUE POR DENTRO
+                </span>
+
+                <h2>
+                    Notícias direto na sua tela.
+                </h2>
+
+                <p>
+                    Receba as principais novidades do futebol feminino.
+                </p>
+
+            </div>
+
+            <form id="newsletterForm">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Seu melhor e-mail"
+                    required
+                >
+
+                <button type="submit">
+                    INSCREVER
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            <span>ÁREA</span>
+            <strong>DELAS</strong>
+        </div>
+
+        <p>
+            Futebol feminino, informação e paixão.
+        </p>
+
+        <div class="social">
+            <span>Instagram</span>
+            <span>TikTok</span>
+            <span>YouTube</span>
+        </div>
+
+        <div class="copyright">
+            © 2026 Área Delas • Todos os direitos reservados.
+        </div>
+
+    </footer>
+
+
+    <!-- TOAST -->
+    <div id="toast">
+        Inscrição realizada com sucesso! ⚽
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
