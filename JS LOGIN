@@ -1,0 +1,300 @@
+
+const loginForm = document.querySelector("#login-form");
+const registerForm = document.querySelector("#register-form");
+const formTitle = document.querySelector("#form-title");
+const formDescription = document.querySelector("#form-description");
+const notice = document.querySelector("#notice");
+
+document.querySelector("#current-year").textContent =
+  new Date().getFullYear();
+
+// Estas contas são apenas para demonstração local.
+// Não use senhas reais: o navegador não é um banco de dados seguro.
+const DEMO_KEY = "areaDelasDemoAccounts";
+
+function getAccounts() {
+  try {
+    const data = localStorage.getItem(DEMO_KEY);
+    const accounts = data ? JSON.parse(data) : [];
+    return Array.isArray(accounts) ? accounts : [];
+  } catch {
+    return [];
+  }
+}
+
+function showNotice(message, type = "error") {
+  notice.textContent = message;
+  notice.className = `notice ${type}`;
+  notice.hidden = false;
+}
+
+function clearNotice() {
+  notice.hidden = true;
+  notice.textContent = "";
+  notice.className = "notice";
+}
+
+function clearErrors(form) {
+  form.querySelectorAll(".field-error").forEach((element) => {
+    element.textContent = "";
+  });
+
+  form.querySelectorAll("input").forEach((input) => {
+    input.classList.remove("invalid");
+    input.removeAttribute("aria-invalid");
+  });
+}
+
+function setError(inputId, message) {
+  const input = document.getElementById(inputId);
+  const error = document.getElementById(`${inputId}-error`);
+
+  if (input) {
+    input.classList.add("invalid");
+    input.setAttribute("aria-invalid", "true");
+  }
+
+  if (error) {
+    error.textContent = message;
+  }
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function switchForm(destination) {
+  clearNotice();
+  clearErrors(loginForm);
+  clearErrors(registerForm);
+
+  const showRegister = destination === "register";
+
+  loginForm.hidden = showRegister;
+  registerForm.hidden = !showRegister;
+
+  formTitle.textContent = showRegister
+    ? "Faça parte do nosso time!"
+    : "Que bom ter você de volta!";
+
+  formDescription.textContent = showRegister
+    ? "Crie sua conta e conecte-se ao futebol feminino."
+    : "Entre na sua conta para continuar.";
+
+  document.querySelector("#accept-terms").checked = false;
+
+  const firstInput = showRegister
+    ? document.querySelector("#register-name")
+    : document.querySelector("#login-email");
+
+  firstInput.focus();
+}
+
+document.querySelectorAll("[data-switch]").forEach((button) => {
+  button.addEventListener("click", () => {
+    switchForm(button.dataset.switch);
+  });
+});
+
+// Mostrar ou ocultar senha.
+document.querySelectorAll("[data-toggle]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const input = document.getElementById(button.dataset.toggle);
+    const isPassword = input.type === "password";
+
+    input.type = isPassword ? "text" : "password";
+    button.textContent = isPassword ? "Ocultar" : "Mostrar";
+    button.setAttribute(
+      "aria-label",
+      isPassword ? "Ocultar senha" : "Mostrar senha"
+    );
+  });
+});
+
+// Limpa erros individuais enquanto a pessoa corrige os campos.
+document.querySelectorAll("input").forEach((input) => {
+  input.addEventListener("input", () => {
+    input.classList.remove("invalid");
+    input.removeAttribute("aria-invalid");
+
+    const error = document.getElementById(`${input.id}-error`);
+    if (error) error.textContent = "";
+
+    clearNotice();
+  });
+});
+
+// Cadastro.
+registerForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  clearNotice();
+  clearErrors(registerForm);
+
+  const name = document.querySelector("#register-name").value.trim();
+  const email = document.querySelector("#register-email").value.trim().toLowerCase();
+  const password = document.querySelector("#register-password").value;
+  const confirmation = document.querySelector("#confirm-password").value;
+  const acceptedTerms = document.querySelector("#accept-terms").checked;
+
+  let valid = true;
+
+  if (name.length < 3) {
+    setError("register-name", "Digite seu nome completo (mínimo de 3 caracteres).");
+    valid = false;
+  }
+
+  if (name.length > 80) {
+    setError("register-name", "O nome deve ter no máximo 80 caracteres.");
+    valid = false;
+  }
+
+  if (!isValidEmail(email)) {
+    setError("register-email", "Digite um e-mail válido.");
+    valid = false;
+  }
+
+  if (password.length < 8) {
+    setError("register-password", "A senha precisa ter pelo menos 8 caracteres.");
+    valid = false;
+  }
+
+  if (password.length > 128) {
+    setError("register-password", "A senha deve ter no máximo 128 caracteres.");
+    valid = false;
+  }
+
+  if (confirmation !== password || confirmation.length === 0) {
+    setError("confirm-password", "As senhas precisam ser iguais.");
+    valid = false;
+  }
+
+  if (!acceptedTerms) {
+    document.querySelector("#terms-error").textContent =
+      "Você precisa aceitar os termos para continuar.";
+    valid = false;
+  }
+
+  if (!valid) {
+    showNotice("Confira os campos destacados e tente novamente.");
+    return;
+  }
+
+  let accounts;
+
+  try {
+    accounts = getAccounts();
+  } catch {
+    showNotice("Não foi possível acessar o armazenamento do navegador.");
+    return;
+  }
+
+  if (accounts.some((account) => account.email === email)) {
+    setError("register-email", "Este e-mail já está cadastrado neste navegador.");
+    showNotice("Já existe uma conta de demonstração com este e-mail.");
+    return;
+  }
+
+  accounts.push({ name, email, password });
+
+  try {
+    localStorage.setItem(DEMO_KEY, JSON.stringify(accounts));
+  } catch {
+    showNotice("O navegador não permitiu salvar a conta de demonstração.");
+    return;
+  }
+
+  registerForm.reset();
+  switchForm("login");
+
+  document.querySelector("#login-email").value = email;
+  showNotice(
+    `Cadastro de demonstração concluído, ${name}! Agora entre com seu e-mail e senha.`,
+    "success"
+  );
+});
+
+// Login.
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  clearNotice();
+  clearErrors(loginForm);
+
+  const email = document.querySelector("#login-email").value.trim().toLowerCase();
+  const password = document.querySelector("#login-password").value;
+  let valid = true;
+
+  if (!isValidEmail(email)) {
+    setError("login-email", "Digite um e-mail válido.");
+    valid = false;
+  }
+
+  if (!password) {
+    setError("login-password", "Digite sua senha.");
+    valid = false;
+  }
+
+  if (!valid) {
+    showNotice("Preencha os campos corretamente para entrar.");
+    return;
+  }
+
+  const account = getAccounts().find(
+    (item) => item.email === email && item.password === password
+  );
+
+  if (!account) {
+    showNotice(
+      "E-mail ou senha incorretos. Confira seus dados ou crie uma conta de demonstração."
+    );
+    return;
+  }
+
+  // Não guardamos a senha na sessão.
+  try {
+    const session = {
+      name: account.name,
+      email: account.email,
+      loggedInAt: new Date().toISOString()
+    };
+
+    const remember = document.querySelector("#remember-me").checked;
+    const storage = remember ? localStorage : sessionStorage;
+
+    sessionStorage.removeItem("areaDelasSession");
+    localStorage.removeItem("areaDelasRemembered");
+
+    storage.setItem(
+      remember ? "areaDelasRemembered" : "areaDelasSession",
+      JSON.stringify(session)
+    );
+  } catch {
+    showNotice("Não foi possível criar a sessão neste navegador.");
+    return;
+  }
+
+  showNotice(
+    `Login de demonstração realizado! Bem-vinda, ${account.name}!`,
+    "success"
+  );
+
+  // Futuramente, redirecione para a página inicial do portal:
+  // window.location.href = "home.html";
+});
+
+// Recuperação de senha demonstrativa.
+document.querySelector("#forgot-password").addEventListener("click", () => {
+  clearNotice();
+
+  const email = document.querySelector("#login-email").value.trim();
+
+  if (!isValidEmail(email)) {
+    showNotice("Digite seu e-mail no campo acima para continuar.");
+    document.querySelector("#login-email").focus();
+    return;
+  }
+
+  showNotice(
+    "A recuperação de senha ainda não está conectada. Para redefinir senhas de verdade, será necessário configurar um serviço de autenticação.",
+    "success"
+  );
+});
